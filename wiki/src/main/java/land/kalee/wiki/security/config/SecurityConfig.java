@@ -14,11 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
@@ -26,11 +27,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/member/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/**").permitAll();
+
+        http.cors().and().csrf().disable();
+//        http.formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/")
+//                .permitAll();
+//
+//        http.logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login")
+//                .invalidateHttpSession(true);
+//
+//        http.exceptionHandling()
+//                .accessDeniedPage("/denied");
     }
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         
