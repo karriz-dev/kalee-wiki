@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("http://localhost:3000","http://localhost:8080", "http://localhost:8088", "http://wiki.kalee.land:8080","http://wiki.kalee.land:3000","http://wiki.kalee.land:8088")
+                .allowedOriginPatterns("http://localhost:3000","http://localhost:8080", "http://localhost:8088", "http://wiki.kalee.land", "http://wiki.kalee.land:8080","http://wiki.kalee.land:3000","http://wiki.kalee.land:8088")
                 .allowedMethods("*")
                 .maxAge(3000);
 	}
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/**").permitAll();
 
-        //http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable();
 //        http.formLogin()
 //                .loginPage("/login")
 //                .defaultSuccessUrl("/")
