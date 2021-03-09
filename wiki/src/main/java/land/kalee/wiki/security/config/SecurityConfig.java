@@ -26,23 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-	
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080/wiki", "http://localhost:3000", "http://wiki.kalee.land:8080", "http://wiki.kalee.land:8088", "http://wiki.kalee.land"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("http://localhost:3000","http://localhost:8080", "http://localhost:8088", "http://wiki.kalee.land:8080","http://wiki.kalee.land:3000","http://wiki.kalee.land:8088")
                 .allowedMethods("*")
                 .maxAge(3000);
 	}
@@ -60,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/**").permitAll();
 
-        http.cors().and().csrf().disable();
+        //http.cors().and().csrf().disable();
 //        http.formLogin()
 //                .loginPage("/login")
 //                .defaultSuccessUrl("/")
