@@ -37,7 +37,7 @@ public class ArticleService {
 	}
 	
 	public List<Article> getArticles(String keyword) {
-		return articleRepository.findByTitle(keyword);
+		return articleRepository.findByTitleContaining(keyword);
 	}
 	
 	public Result insertArticle(Article article) {

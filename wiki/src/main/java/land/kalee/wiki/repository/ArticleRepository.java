@@ -12,5 +12,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 	public Article findByArticleID(Long id);
 	public Article findTopByOrderByArticleIDDesc();
 	public List<Article> findTop10ByOrderByArticleIDDesc();
-	public List<Article> findByTitle(String title);
+	public List<Article> findByTitleContaining(String title);
 }
