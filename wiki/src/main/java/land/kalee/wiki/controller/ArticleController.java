@@ -46,6 +46,12 @@ public class ArticleController {
 	{
 		return articleService.getArticles();
 	}
+	
+	@GetMapping("/get/{search}")
+	public List<Article> getArticles(@PathVariable("search") String keyword)
+	{
+		return articleService.getArticles(keyword);
+	}
 
 	@PostMapping("/insert")
 	public Result insertArticles(@RequestBody Article article)

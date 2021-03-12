@@ -36,6 +36,10 @@ public class ArticleService {
 		return articleRepository.findAll();
 	}
 	
+	public List<Article> getArticles(String keyword) {
+		return articleRepository.findByTitle(keyword);
+	}
+	
 	public Result insertArticle(Article article) {
 		Article result = articleRepository.save(article);
 		
